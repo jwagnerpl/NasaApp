@@ -24,8 +24,6 @@ public class MainFragment extends Fragment {
         View decorView = getActivity().getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
-
-
         return view;
     }
 
@@ -38,6 +36,7 @@ public class MainFragment extends Fragment {
 
         TabLayout tabLayout = view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vp);
-
     }
+
+
 }
