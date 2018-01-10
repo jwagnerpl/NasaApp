@@ -1,5 +1,7 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
+import android.app.DatePickerDialog;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,16 +16,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.api.DateRangeApiCall;
 import teamtreehouse.com.nasaapp.model.CraftDates;
+import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
+import static android.R.anim.*;
 
-public class StartScreenFragment extends Fragment {
+
+public class StartScreenFragment extends android.app.Fragment implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     public static ArrayList<CraftDates> craftDates;
     Button launchButton;
@@ -59,12 +66,27 @@ public class StartScreenFragment extends Fragment {
         launchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v4.app.Fragment mainFragment = new MainFragment();
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
+//                android.app.Fragment mainFragment = new MainFragment();
+//                android.app.FragmentManager fm = getActivity().getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+//                //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
+//                fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
+                        Calendar now = Calendar.getInstance();
+                        com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
+                                DatePickerDialog.newInstance(StartScreenFragment.this,
+                                now.get(Calendar.YEAR),
+                                now.get(Calendar.MONTH),
+                                now.get(Calendar.DAY_OF_MONTH)
+                        );
+                        
+                                .show(getFragmentManager(), "Datepickerdialog");
+
             }
         });
+    }
+
+    @Override
+    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
     }
 }
