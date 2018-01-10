@@ -52,8 +52,8 @@ public class StartScreenFragment extends android.app.Fragment implements com.wdu
 
         launchButton = view.findViewById(R.id.launchButton);
 
-        DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
-        dateRangeApiCall.getDates();
+        //DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
+        //dateRangeApiCall.getDates();
 
 
         launchButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -66,20 +66,12 @@ public class StartScreenFragment extends android.app.Fragment implements com.wdu
         launchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                android.app.Fragment mainFragment = new MainFragment();
-//                android.app.FragmentManager fm = getActivity().getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//                //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
-//                fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
-                        Calendar now = Calendar.getInstance();
-                        com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
-                                DatePickerDialog.newInstance(StartScreenFragment.this,
-                                now.get(Calendar.YEAR),
-                                now.get(Calendar.MONTH),
-                                now.get(Calendar.DAY_OF_MONTH)
-                        );
-                        
-                                .show(getFragmentManager(), "Datepickerdialog");
+                android.app.Fragment mainFragment = new MainFragment();
+                android.app.FragmentManager fm = getActivity().getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
+                fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
+
 
             }
         });

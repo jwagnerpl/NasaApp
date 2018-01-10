@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.MyFragmentPagerAdapter;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends android.app.Fragment {
     private static final java.lang.String ARG_PAGE = "ARG_Page";
 
     @Nullable
@@ -44,6 +44,5 @@ public class MainFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vp);
     }
-
 
 }

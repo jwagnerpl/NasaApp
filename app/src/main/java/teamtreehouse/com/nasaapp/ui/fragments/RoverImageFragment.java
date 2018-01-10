@@ -14,15 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.MyPagerAdapter;
 
-public class RoverImageFragment extends Fragment {
+public class RoverImageFragment extends android.app.Fragment{
 
     public static Context context;
     private static final String TAG = "RoverImageFragment";
+    public static android.app.FragmentManager fm;
     ArrayList<Integer> imageArray = new ArrayList<>();
     ViewPager viewPager;
     private static final Integer[] IMAGES = {R.drawable.opportunity, R.drawable.curiosity, R.drawable.spirit};
@@ -31,7 +35,8 @@ public class RoverImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rover_image, container, false);
-        context = getContext();
+        context = getActivity().getApplicationContext();
+        fm = getFragmentManager();
         return view;
     }
 
@@ -64,3 +69,12 @@ public class RoverImageFragment extends Fragment {
         viewPager.setAdapter(new MyPagerAdapter(imageArray, getActivity().getApplicationContext()));
     }
 }
+
+//    Calendar now = Calendar.getInstance();
+//    com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
+//            DatePickerDialog.newInstance(StartScreenFragment.this,
+//            now.get(Calendar.YEAR),
+//            now.get(Calendar.MONTH),
+//            now.get(Calendar.DAY_OF_MONTH)
+//    );
+//                        dpd.show(getFragmentManager(), "Datepickerdialog");

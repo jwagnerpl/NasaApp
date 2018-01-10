@@ -15,13 +15,13 @@
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha=".5"
+        android:background="@color/translucent_grey"
+        android:id="@+id/roverButton"
         android:text="Select this Rover"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@id/roverImageView"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

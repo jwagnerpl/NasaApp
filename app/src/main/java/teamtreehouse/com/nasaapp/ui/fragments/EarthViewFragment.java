@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import teamtreehouse.com.nasaapp.R;
 
-public class EarthViewFragment extends Fragment {
+public class EarthViewFragment extends android.app.Fragment {
 
     private static final java.lang.String ARG_PAGE = "ARGPage";
 

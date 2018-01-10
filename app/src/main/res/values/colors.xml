@@ -6,4 +6,5 @@
     <color name="white">#ffffff</color>
     <color name="button_focused">#ff000d</color>
     <color name="button_default">#33ee1a</color>
+    <color name="translucent_grey">#84e6e6e6</color>
 </resources>
