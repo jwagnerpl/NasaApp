@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ineedspace">iNeedSpace</string>
     <string name="blast_off">Blast Off!</string>
+    <string name="choose_a_rover">Choose a rover!</string>
 </resources>

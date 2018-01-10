@@ -15,11 +15,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.api.DateRangeApiCall;
+import teamtreehouse.com.nasaapp.model.CraftDates;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 
 public class StartScreenFragment extends Fragment {
 
+    public static ArrayList<CraftDates> craftDates;
     Button launchButton;
     private static final String TAG = "StartScreenFragment";
 
@@ -28,10 +34,6 @@ public class StartScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start_screen, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        View decorView = getActivity().getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
 
         return view;
     }
@@ -41,8 +43,11 @@ public class StartScreenFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d(TAG, getView().toString());
         launchButton = view.findViewById(R.id.launchButton);
+
+        DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
+        dateRangeApiCall.getDates();
+
 
         launchButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
