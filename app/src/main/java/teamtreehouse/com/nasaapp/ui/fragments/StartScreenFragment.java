@@ -2,6 +2,8 @@ package teamtreehouse.com.nasaapp.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -52,9 +54,8 @@ public class StartScreenFragment extends android.app.Fragment implements com.wdu
 
         launchButton = view.findViewById(R.id.launchButton);
 
-        //DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
-        //dateRangeApiCall.getDates();
-
+        DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
+        dateRangeApiCall.getDates();
 
         launchButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -71,8 +72,6 @@ public class StartScreenFragment extends android.app.Fragment implements com.wdu
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
                 fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
-
-
             }
         });
     }

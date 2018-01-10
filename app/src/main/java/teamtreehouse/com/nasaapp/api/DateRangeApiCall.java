@@ -1,6 +1,8 @@
 package teamtreehouse.com.nasaapp.api;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -14,9 +16,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.model.CraftDates;
 import teamtreehouse.com.nasaapp.model.DateRangeData;
 import teamtreehouse.com.nasaapp.model.PhotoManifest;
+import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.ui.fragments.StartScreenFragment;
 
 
@@ -28,12 +32,14 @@ public class DateRangeApiCall extends Fragment {
     String opportunityMaxDate;
     String spiritLandDate;
     String spiritMaxDate;
+    SharedPreferences sharedPreferences;
     private static final String TAG = "DateRangeApiCall";
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
 
     public ArrayList<CraftDates> getDates() {
 
+        MainActivity mainActivity = new MainActivity();
         Observer observer = new Observer() {
 
             @Override
@@ -61,10 +67,8 @@ public class DateRangeApiCall extends Fragment {
             @Override
             public void onComplete() {
                 if(craftDates.size() == 3){
-                    StartScreenFragment.craftDates = craftDates;
-                    for(CraftDates date: StartScreenFragment.craftDates){
-                        Log.d(TAG,date.getLandDate() + date.getMaxDate() + date.getName());
-                    }
+                    Log.d(TAG, "we have 3");
+                    MainActivity.craftDates = craftDates;
                 }
                 else{Log.d(TAG, craftDates.size() + "");}
             }

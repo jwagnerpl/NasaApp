@@ -6,4 +6,11 @@
     <string name="ineedspace">iNeedSpace</string>
     <string name="blast_off">Blast Off!</string>
     <string name="choose_a_rover">Choose a rover!</string>
+    <string name="preference_file_key"> 12 </string>
+    <string name="opportunity_min_date"> opportunity_min_date </string>
+    <string name="opportunity_max_date"> opportunity_max_date </string>
+    <string name="spirit_min_date"> spirit_min_date </string>
+    <string name="spirit_max_date"> spirit_max_date </string>
+    <string name="curiosity_min_date"> curiosity_min_date </string>
+    <string name="curiosity_max_date"> curiosity_max_date </string>
 </resources>

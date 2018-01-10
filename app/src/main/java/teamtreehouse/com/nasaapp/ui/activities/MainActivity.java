@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.DatePicker;
 
+import java.util.ArrayList;
+
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.model.CraftDates;
 import teamtreehouse.com.nasaapp.ui.fragments.StartScreenFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -18,6 +21,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     public static Context context;
+    public static ArrayList<CraftDates> craftDates;
 
     @Override
     protected void attachBaseContext(Context newBase) {
