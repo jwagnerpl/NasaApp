@@ -34,24 +34,26 @@ import teamtreehouse.com.nasaapp.ui.fragments.DatePickerFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment;
 import teamtreehouse.com.nasaapp.utilities.GlobalContext;
 
-public class MyPagerAdapter extends PagerAdapter {
+public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     private ItemClickListener itemClickListener;
     private ArrayList<Integer> images;
     private Fragment fragment;
     private LayoutInflater inflater;
     public static Context context;
+    private Activity activity;
     FragmentManager fm;
     private static final String TAG = "MyPagerAdapter";
 
 
 
-    public MyPagerAdapter(ArrayList<Integer> images, Context context) {
+    public MyPagerAdapter(ArrayList<Integer> images, Context context, Activity activity) {
         this.images = images;
         this.fragment = fragment;
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.fm = fm;
+        this.activity = activity;
     }
 
 
@@ -84,7 +86,15 @@ public class MyPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "roverButton set");
-
+    Calendar now = Calendar.getInstance();
+    RoverImageFragment roverImageFragment = new RoverImageFragment();
+    com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
+            DatePickerDialog.newInstance(roverImageFragment,
+            now.get(Calendar.YEAR),
+            now.get(Calendar.MONTH),
+            now.get(Calendar.DAY_OF_MONTH)
+    );
+                        dpd.show(RoverImageFragment.fm, "Datepickerdialog");
             }
         });
 
@@ -114,6 +124,11 @@ public class MyPagerAdapter extends PagerAdapter {
 
     public void setItemClickListener(ItemClickListener itemClickListener){
         this.itemClickListener = itemClickListener;
+    }
+
+    @Override
+    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
     }
 
     public interface ItemClickListener {
