@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -71,6 +72,10 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-
+        SelectCameraFragment scf = new SelectCameraFragment();
+        android.app.FragmentManager fragmentManager = view.getFragmentManager();
+        android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
+        Log.d(TAG, "replaced frag");
+        ft.replace(R.id.roverLayout, scf).commit();
     }
 }

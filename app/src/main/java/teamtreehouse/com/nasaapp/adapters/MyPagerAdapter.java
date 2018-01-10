@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
@@ -33,15 +34,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.model.Camera;
 import teamtreehouse.com.nasaapp.model.CraftDates;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.ui.fragments.DatePickerFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment;
+import teamtreehouse.com.nasaapp.ui.fragments.SelectCameraFragment;
 import teamtreehouse.com.nasaapp.utilities.GlobalContext;
 
 public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
-    private ItemClickListener itemClickListener;
     private ArrayList<Integer> images;
     private Fragment fragment;
     Calendar minCalendar;
@@ -83,8 +85,8 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         minCalendar = Calendar.getInstance();
         maxCalendar = Calendar.getInstance();
 
-        for(CraftDates date: MainActivity.craftDates){
-            switch(date.getName()){
+        for (CraftDates date : MainActivity.craftDates) {
+            switch (date.getName()) {
                 case "Opportunity":
                     try {
                         opportunityLandDate = sdf.parse(date.getLandDate()).getTime();
@@ -115,12 +117,15 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         Log.d(TAG, "here ww are");
         final ImageView imageView = imageLayout.findViewById(R.id.roverImageView);
         final Button roverButton = imageLayout.findViewById(R.id.roverButton);
-        switch(position){
-            case 0: roverButton.setText("Opportunity \n Select this rover.");
+        switch (position) {
+            case 0:
+                roverButton.setText("Opportunity \n Select this rover.");
                 break;
-            case 1: roverButton.setText("Curiosity \n Select this rover.");
+            case 1:
+                roverButton.setText("Curiosity \n Select this rover.");
                 break;
-            case 2: roverButton.setText("Spirit \n Select this rover.");
+            case 2:
+                roverButton.setText("Spirit \n Select this rover.");
                 break;
         }
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -130,28 +135,37 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         roverButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Camera.selectedRover = position;
                 Log.d(TAG, "roverButton set");
-    Calendar now = Calendar.getInstance();
+                Calendar now = Calendar.getInstance();
+                // @Refactor - Find better way to instantiate datepicker than creating additional instance of roverimagefragment
+                RoverImageFragment roverImageFragment = new RoverImageFragment();
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
+                        DatePickerDialog.newInstance(/*refactor here*/roverImageFragment,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
 
-    // @Refactor - Find better way to instantiate datepicker than creating additional instance of roverimagefragment
-    RoverImageFragment roverImageFragment = new RoverImageFragment();
-    com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
-            DatePickerDialog.newInstance(/*refactor here*/roverImageFragment,
-            now.get(Calendar.YEAR),
-            now.get(Calendar.MONTH),
-            now.get(Calendar.DAY_OF_MONTH)
-    );
+                switch (position) {
+                    case 0:
+                        maxCalendar.setTimeInMillis(opportunityMaxDate);
+                        minCalendar.setTimeInMillis(opportunityLandDate);
+                        break;
+                    case 1:
+                        maxCalendar.setTimeInMillis(curiosityMaxDate);
+                        minCalendar.setTimeInMillis(curiosityLandDate);
+                        break;
+                    case 2:
+                        maxCalendar.setTimeInMillis(spiritMaxDate);
+                        minCalendar.setTimeInMillis(spiritLandDate);
+                        break;
+                }
 
-                switch(position) {
-                case 0: maxCalendar.setTimeInMillis(opportunityMaxDate); minCalendar.setTimeInMillis(opportunityLandDate); break;
-                case 1: maxCalendar.setTimeInMillis(curiosityMaxDate); minCalendar.setTimeInMillis(curiosityLandDate); break;
-                case 2: maxCalendar.setTimeInMillis(spiritMaxDate); minCalendar.setTimeInMillis(spiritLandDate); break;
-            }
-
-                        dpd.setMinDate(minCalendar);
-                        dpd.setMaxDate(maxCalendar);
-                        dpd.showYearPickerFirst(true);
-                        dpd.show(RoverImageFragment.fm, "hello");
+                dpd.setMinDate(minCalendar);
+                dpd.setMaxDate(maxCalendar);
+                dpd.showYearPickerFirst(true);
+                dpd.show(RoverImageFragment.fm, "hello");
             }
         });
 
@@ -178,17 +192,10 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         return view.equals(object);
     }
 
-
-    public void setItemClickListener(ItemClickListener itemClickListener){
-        this.itemClickListener = itemClickListener;
-    }
-
     @Override
     public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
     }
 
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
+
 }
