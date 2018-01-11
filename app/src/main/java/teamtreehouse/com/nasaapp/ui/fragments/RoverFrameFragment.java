@@ -25,8 +25,7 @@ public class RoverFrameFragment extends Fragment {
         RoverImageFragment rif = new RoverImageFragment();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.frame2, rif, "addRover");
-        ft.addToBackStack("addRoverFragment").commit();
+        ft.add(R.id.frame2, rif, "addRover").commit();
     }
 
     public static RoverFrameFragment newInstance(int page, String title) {

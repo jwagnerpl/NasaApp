@@ -48,8 +48,11 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
     }
 
     private void init() {
-        for(int i=0; i<IMAGES.length; i++)
-            imageArray.add(IMAGES[i]);
+        if(imageArray.size() <= 0){
+            for (int i = 0; i < IMAGES.length; i++)
+                imageArray.add(IMAGES[i]);
+            Log.d(TAG, imageArray.toString());
+        }
 
         viewPager = getView().findViewById(R.id.roverViewPager);
         viewPager.setAdapter(new MyPagerAdapter(imageArray, getActivity().getApplicationContext(), getActivity()));
@@ -62,6 +65,7 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         SelectCameraFragment scf = new SelectCameraFragment();
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.addToBackStack("this");
         ft.detach(fm.findFragmentByTag("addRover"));
         ft.replace(R.id.frame1, scf).commit();
     }

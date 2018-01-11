@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        android.app.FragmentManager fm = getFragmentManager();
+        fm.popBackStack();
+    }
 }
