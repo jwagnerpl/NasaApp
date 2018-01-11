@@ -1,24 +1,17 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.MyPagerAdapter;
@@ -53,14 +46,7 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         init();
     }
 
-    public static RoverImageFragment newInstance(int page, String title) {
-        RoverImageFragment ri = new RoverImageFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle",title);
-        ri.setArguments(args);
-        return ri;
-    }
+
 
     private void init() {
         for(int i=0; i<IMAGES.length; i++)
@@ -75,7 +61,7 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         SelectCameraFragment scf = new SelectCameraFragment();
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
-        Log.d(TAG, "replaced frag");
-        ft.replace(R.id.coordinatorLayout, scf).commit();
+        ft.detach(fm.findFragmentByTag("addRover"));
+        ft.replace(R.id.frame1, scf).commit();
     }
 }

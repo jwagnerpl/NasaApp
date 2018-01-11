@@ -36,7 +36,7 @@ public class SelectCameraFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_select_camera, container, false);
         ViewPager viewPager = getActivity().findViewById(R.id.roverViewPager);
         ViewGroup vg = (ViewGroup) viewPager.getParent();
-        //vg.removeView(viewPager);
+        //Zvg.removeView(viewPager);
         return view;
     }
 
@@ -61,7 +61,6 @@ public class SelectCameraFragment extends android.app.Fragment {
         }
 
         Log.d(TAG, cameras.toString());
-
         roverCameraRecylerAdapter = new RoverCameraRecylerAdapter(cameras);
         recyclerView.setAdapter(roverCameraRecylerAdapter);
 
