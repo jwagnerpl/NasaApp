@@ -1,4 +1,4 @@
-package teamtreehouse.com.nasaapp.model;
+package teamtreehouse.com.nasaapp.date_model;
 
 public class CraftDates {
     String maxDate;

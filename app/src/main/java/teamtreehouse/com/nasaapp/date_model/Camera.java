@@ -1,15 +1,8 @@
-package teamtreehouse.com.nasaapp.model;
+package teamtreehouse.com.nasaapp.date_model;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.View;
 
 import java.util.ArrayList;
-
-import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.utilities.GlobalContext;
 
 public class Camera {
     public String camAbbreviation;

@@ -1,7 +1,6 @@
 package teamtreehouse.com.nasaapp.api;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -16,12 +15,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.model.CraftDates;
-import teamtreehouse.com.nasaapp.model.DateRangeData;
-import teamtreehouse.com.nasaapp.model.PhotoManifest;
+import teamtreehouse.com.nasaapp.date_model.CraftDates;
+import teamtreehouse.com.nasaapp.date_model.DateRangeData;
+import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
-import teamtreehouse.com.nasaapp.ui.fragments.StartScreenFragment;
 
 
 public class DateRangeApiCall extends Fragment {

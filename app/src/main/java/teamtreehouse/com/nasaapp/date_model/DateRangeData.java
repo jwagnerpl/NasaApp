@@ -1,9 +1,7 @@
-package teamtreehouse.com.nasaapp.model;
+package teamtreehouse.com.nasaapp.date_model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 
 public class DateRangeData {
 

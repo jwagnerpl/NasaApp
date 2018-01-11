@@ -1,12 +1,14 @@
-package teamtreehouse.com.nasaapp.model;
+package teamtreehouse.com.nasaapp.photo_model;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+public class Rover {
 
-public class PhotoManifest {
-
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -28,9 +30,17 @@ public class PhotoManifest {
     @SerializedName("total_photos")
     @Expose
     private Integer totalPhotos;
-    @SerializedName("photos")
+    @SerializedName("cameras")
     @Expose
-    private List<Photo> photos = null;
+    private List<Camera_> cameras = null;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -88,12 +98,12 @@ public class PhotoManifest {
         this.totalPhotos = totalPhotos;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<Camera_> getCameras() {
+        return cameras;
     }
 
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
+    public void setCameras(List<Camera_> cameras) {
+        this.cameras = cameras;
     }
 
 }

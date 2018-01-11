@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.model.Camera;
+import teamtreehouse.com.nasaapp.date_model.Camera;
 
 public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraRecylerAdapter.ViewHolder> {
 

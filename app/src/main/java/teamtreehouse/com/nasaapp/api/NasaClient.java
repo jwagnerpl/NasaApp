@@ -2,9 +2,7 @@ package teamtreehouse.com.nasaapp.api;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-import teamtreehouse.com.nasaapp.model.DateRangeData;
+import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 
 public interface NasaClient {
     String NASA_PHOTOS_BASE_URI = "https://api.nasa.gov/mars-photos/api/v1/";

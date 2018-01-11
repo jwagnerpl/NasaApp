@@ -1,10 +1,7 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wdullaer.materialdatetimepicker.Utils;
-
 import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
-import teamtreehouse.com.nasaapp.model.Camera;
+import teamtreehouse.com.nasaapp.date_model.Camera;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
 public class SelectCameraFragment extends android.app.Fragment {

@@ -1,49 +1,30 @@
 package teamtreehouse.com.nasaapp.adapters;
 
 import android.app.Activity;
-import android.app.Application;
-import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.model.Camera;
-import teamtreehouse.com.nasaapp.model.CraftDates;
+import teamtreehouse.com.nasaapp.date_model.Camera;
+import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
-import teamtreehouse.com.nasaapp.ui.fragments.DatePickerFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment;
-import teamtreehouse.com.nasaapp.ui.fragments.SelectCameraFragment;
-import teamtreehouse.com.nasaapp.utilities.GlobalContext;
 
 public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
