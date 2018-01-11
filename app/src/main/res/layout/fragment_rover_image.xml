@@ -1,17 +1,23 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/roverLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment">
+    android:id="@+id/coordinatorLayout"
+    android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/roverLayout"
         android:layout_width="match_parent"
-        android:id="@+id/roverViewPager"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        tools:context="teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/roverViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </android.support.v4.view.ViewPager>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.design.widget.CoordinatorLayout>

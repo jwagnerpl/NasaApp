@@ -1,6 +1,15 @@
 package teamtreehouse.com.nasaapp.model;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
+
 import java.util.ArrayList;
+
+import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.utilities.GlobalContext;
 
 public class Camera {
     public String camAbbreviation;
@@ -8,26 +17,31 @@ public class Camera {
     static ArrayList<Camera> cameras;
     public static int selectedRover;
     public int[] accessibleCrafts;
+    public int[] imageResources;
+    static Context context;
 
-    public Camera(String camAbbreviation, String camDescription, int[] accessibleCrafts) {
+
+    public Camera(String camAbbreviation, String camDescription, int[] accessibleCrafts, int[] imageResources) {
         this.camAbbreviation = camAbbreviation;
         this.camDescription = camDescription;
         this.accessibleCrafts = accessibleCrafts;
+        this.imageResources = imageResources;
     }
 
-    public Camera(){}
+    public Camera(Context context){}
+
 
     public static ArrayList<Camera> getCameraList() {
         cameras = new ArrayList<>();
-        cameras.add(new Camera("fhaz","Front Hazard Avoidance Camera",new int[]{0,1,2}));
-        cameras.add(new Camera("rhaz","Rear Hazard Avoidance Camera",new int[]{0,1,2}));
-        cameras.add(new Camera("mast","Mast Camera",new int[]{0}));
-        cameras.add(new Camera("chemcam","Chemistry and Camera Complex",new int[]{0}));
-        cameras.add(new Camera("mahli","Mars Hand Lens Imager",new int[]{0}));
-        cameras.add(new Camera("mardi","Mars Descent Imager",new int[]{0}));
-        cameras.add(new Camera("navcam","Navigation Camera",new int[]{0,1,2}));
-        cameras.add(new Camera("pancam","Panoramic Camera",new int[]{1,2}));
-        cameras.add(new Camera("minitest","Front Hazard Avoidance Camera",new int[]{1,2}));
+        cameras.add(new Camera("fhaz","Front Hazard Avoidance Camera",new int[]{0,1,2}, new int[]{}));
+        cameras.add(new Camera("rhaz","Rear Hazard Avoidance Camera",new int[]{0,1,2}, new int[]{}));
+        cameras.add(new Camera("mast","Mast Camera",new int[]{0}, new int[]{}));
+        cameras.add(new Camera("chemcam","Chemistry and Camera Complex",new int[]{0}, new int[]{}));
+        cameras.add(new Camera("mahli","Mars Hand Lens Imager",new int[]{0}, new int[]{}));
+        cameras.add(new Camera("mardi","Mars Descent Imager",new int[]{0}, new int[]{}));
+        cameras.add(new Camera("navcam","Navigation Camera",new int[]{0,1,2}, new int[]{}));
+        cameras.add(new Camera("pancam","Panoramic Camera",new int[]{1,2}, new int[]{}));
+        cameras.add(new Camera("minitest","Miniature Thermal Emission Spectrometer (Mini-TES)",new int[]{1,2}, new int[]{}));
         return cameras;
     }
 
@@ -70,4 +84,5 @@ public class Camera {
     public void setAccessibleCrafts(int[] accessibleCrafts) {
         this.accessibleCrafts = accessibleCrafts;
     }
+
 }

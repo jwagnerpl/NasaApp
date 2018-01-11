@@ -12,6 +12,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
@@ -24,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -130,11 +133,12 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         }
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setImageResource(images.get(position));
+        final CoordinatorLayout cl = imageLayout.findViewById(R.id.coordinatorLayout);
         container.addView(imageLayout, 0);
-
         roverButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Camera.selectedRover = position;
                 Log.d(TAG, "roverButton set");
                 Calendar now = Calendar.getInstance();
@@ -146,6 +150,8 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
+
+                Toast.makeText(context, "Choose a date to view rover images.",Toast.LENGTH_LONG);
 
                 switch (position) {
                     case 0:

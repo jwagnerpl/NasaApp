@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.model.CraftDates;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     public static Context context;
     public static ArrayList<CraftDates> craftDates;
+    public static Date selectedDate;
 
     @Override
     protected void attachBaseContext(Context newBase) {

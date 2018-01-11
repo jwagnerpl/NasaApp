@@ -30,7 +30,7 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
     public static android.app.FragmentManager fm;
     ArrayList<Integer> imageArray = new ArrayList<>();
     ViewPager viewPager;
-    private static final Integer[] IMAGES = {R.drawable.opportunity, R.drawable.curiosity, R.drawable.spirit};
+    private static final Integer[] IMAGES = {R.drawable.curiosity,R.drawable.opportunity , R.drawable.spirit};
 
     @Nullable
     @Override
@@ -76,6 +76,6 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
         Log.d(TAG, "replaced frag");
-        ft.replace(R.id.roverLayout, scf).commit();
+        ft.replace(R.id.coordinatorLayout, scf).commit();
     }
 }
