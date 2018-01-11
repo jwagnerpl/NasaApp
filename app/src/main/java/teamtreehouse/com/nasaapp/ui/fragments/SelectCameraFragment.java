@@ -17,7 +17,7 @@ import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
 import teamtreehouse.com.nasaapp.date_model.Camera;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
-public class SelectCameraFragment extends android.app.Fragment {
+public class SelectCameraFragment extends android.app.Fragment implements RoverCameraRecylerAdapter.ItemClickListener {
     private static final String TAG = "SelectCameraFragment";
     RecyclerView recyclerView;
     RoverCameraRecylerAdapter roverCameraRecylerAdapter;
@@ -57,7 +57,13 @@ public class SelectCameraFragment extends android.app.Fragment {
 
         Log.d(TAG, cameras.toString());
         roverCameraRecylerAdapter = new RoverCameraRecylerAdapter(cameras);
+        roverCameraRecylerAdapter.setClickListener(this);
         recyclerView.setAdapter(roverCameraRecylerAdapter);
 
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Log.d(TAG, "click registered");
     }
 }

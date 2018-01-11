@@ -16,6 +16,7 @@ import teamtreehouse.com.nasaapp.date_model.Camera;
 public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraRecylerAdapter.ViewHolder> {
 
     ArrayList<Camera> cameras;
+    ItemClickListener itemClickListener;
     private static final String TAG = "RoverCameraRecylerAdapt";
 
     public RoverCameraRecylerAdapter(ArrayList<Camera> cameras) {
@@ -76,14 +77,34 @@ public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraR
         return cameras.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView photoText;
         public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             photoText = itemView.findViewById(R.id.cameraTitle);
             imageView = itemView.findViewById(R.id.cameraImage);
         }
+
+
+        @Override
+        public void onClick(View view) {
+            if(itemClickListener != null){
+                itemClickListener.onItemClick(view, getAdapterPosition());
+            }
+        }
     }
+
+
+
+    public void setClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener{
+        void onItemClick(View view, int position);
+    }
+
 }
