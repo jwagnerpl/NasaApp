@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.MyPagerAdapter;
+import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class RoverImageFragment extends android.app.Fragment implements DatePickerDialog.OnDateSetListener{
 
@@ -46,8 +47,6 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         init();
     }
 
-
-
     private void init() {
         for(int i=0; i<IMAGES.length; i++)
             imageArray.add(IMAGES[i]);
@@ -58,6 +57,8 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        MainActivity.selectedDate = year + "-" + monthOfYear+1 + "-" + dayOfMonth;
+        Log.d(TAG, MainActivity.selectedDate);
         SelectCameraFragment scf = new SelectCameraFragment();
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();

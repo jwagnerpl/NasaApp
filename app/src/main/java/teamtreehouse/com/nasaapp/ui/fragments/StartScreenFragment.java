@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -32,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import static android.R.anim.*;
 
 
-public class StartScreenFragment extends android.app.Fragment implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
+public class StartScreenFragment extends android.app.Fragment {
 
     public static ArrayList<CraftDates> craftDates;
     Button launchButton;
@@ -64,20 +65,32 @@ public class StartScreenFragment extends android.app.Fragment implements com.wdu
             }
         });
 
-        launchButton.setOnClickListener(new View.OnClickListener() {
+        Handler handler = new Handler();
+        waitFiveSeconds(handler);
+    }
+
+        void waitFiveSeconds(Handler handler){
+        handler.postDelayed(new Runnable(){
             @Override
-            public void onClick(View view) {
-                android.app.Fragment mainFragment = new MainFragment();
-                android.app.FragmentManager fm = getActivity().getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
-                fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
+            public void run() {
+                if(MainActivity.craftDates != null) {
+                    startFragment();
+                }
+
+                else{waitFiveSeconds(handler);}
+
             }
-        });
+        }, 6000);
     }
 
-    @Override
-    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
+        void startFragment(){
+        android.app.Fragment mainFragment = new MainFragment();
+        android.app.FragmentManager fm = getActivity().getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
+        fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
     }
+
+
 }
