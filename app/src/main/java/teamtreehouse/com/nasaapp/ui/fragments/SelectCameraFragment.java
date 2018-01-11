@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
+import teamtreehouse.com.nasaapp.api.ApiCall;
 import teamtreehouse.com.nasaapp.date_model.Camera;
+import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
 public class SelectCameraFragment extends android.app.Fragment implements RoverCameraRecylerAdapter.ItemClickListener {
@@ -65,5 +67,10 @@ public class SelectCameraFragment extends android.app.Fragment implements RoverC
     @Override
     public void onItemClick(View view, int position) {
         Log.d(TAG, "click registered");
+        Log.d(TAG, cameras.get(position).getCamAbbreviation());
+        Log.d(TAG, MainActivity.selectedDate);
+        Log.d(TAG, MainActivity.selectedRover);
+        ApiCall apiCall = new ApiCall();
+        apiCall.getPhotos(MainActivity.selectedRover,MainActivity.selectedDate,cameras.get(position).getCamAbbreviation());
     }
 }

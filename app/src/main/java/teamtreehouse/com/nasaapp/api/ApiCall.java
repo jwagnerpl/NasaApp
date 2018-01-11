@@ -18,10 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
+import teamtreehouse.com.nasaapp.photo_model.Photo;
+import teamtreehouse.com.nasaapp.photo_model.Photos;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 
-public class DateRangeApiCall extends Fragment {
+public class ApiCall extends Fragment {
 
     String curiosityLandDate;
     String curiosityMaxDate;
@@ -30,9 +32,41 @@ public class DateRangeApiCall extends Fragment {
     String spiritLandDate;
     String spiritMaxDate;
     SharedPreferences sharedPreferences;
-    private static final String TAG = "DateRangeApiCall";
+    private static final String TAG = "ApiCall";
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
+
+    public void getPhotos(String craft, String date, String abbrev){
+
+        Observer observer = new Observer(){
+
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object value) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "Call went wrong" + e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "call complete");
+            }
+        };
+
+        NasaClient nasaClient = getNasaClient();
+        Observable<Photos> photoCall = nasaClient.getRequestedPhotos(craft, date, abbrev);
+        photoCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+
+    }
+
 
     public ArrayList<CraftDates> getDates() {
 
@@ -71,14 +105,7 @@ public class DateRangeApiCall extends Fragment {
             }
         };
 
-        Retrofit.Builder builder = new Retrofit.Builder().
-                baseUrl(NasaClient.NASA_PHOTOS_BASE_URI).
-                addConverterFactory(GsonConverterFactory.create()).
-                addCallAdapterFactory(RxJava2CallAdapterFactory.create());
-
-        Retrofit retrofit = builder.build();
-
-        NasaClient nasaClient = retrofit.create(NasaClient.class);
+        NasaClient nasaClient = getNasaClient();
         Observable<DateRangeData> curiosityCall = nasaClient.getCuriosityDateRange();
         Observable<DateRangeData> opportunityCall = nasaClient.getOpportunityDateRange();
         Observable<DateRangeData> spiritCall = nasaClient.getSpiritDateRange();
@@ -88,5 +115,15 @@ public class DateRangeApiCall extends Fragment {
         spiritCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
 
         return craftDates;
+    }
+
+    private NasaClient getNasaClient() {
+        Retrofit.Builder builder = new Retrofit.Builder().
+                baseUrl(NasaClient.NASA_PHOTOS_BASE_URI).
+                addConverterFactory(GsonConverterFactory.create()).
+                addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+        Retrofit retrofit = builder.build();
+
+        return retrofit.create(NasaClient.class);
     }
 }

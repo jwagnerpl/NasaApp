@@ -14,7 +14,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.api.DateRangeApiCall;
+import teamtreehouse.com.nasaapp.api.ApiCall;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
@@ -41,8 +41,8 @@ public class StartScreenFragment extends android.app.Fragment {
 
         launchButton = view.findViewById(R.id.launchButton);
 
-        DateRangeApiCall dateRangeApiCall = new DateRangeApiCall();
-        dateRangeApiCall.getDates();
+        ApiCall apiCall = new ApiCall();
+        apiCall.getDates();
 
         launchButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

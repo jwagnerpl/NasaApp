@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static Context context;
     public static ArrayList<CraftDates> craftDates;
     public static String selectedDate;
+    public static String selectedRover;
 
     @Override
     protected void attachBaseContext(Context newBase) {

@@ -88,7 +88,6 @@ public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraR
             imageView = itemView.findViewById(R.id.cameraImage);
         }
 
-
         @Override
         public void onClick(View view) {
             if(itemClickListener != null){

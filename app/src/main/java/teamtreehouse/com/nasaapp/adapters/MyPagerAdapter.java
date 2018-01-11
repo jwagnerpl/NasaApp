@@ -119,6 +119,14 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         roverButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                switch(position){
+                    case 0: MainActivity.selectedRover = "curiosity";
+                        break;
+                    case 1: MainActivity.selectedRover = "opportunity";
+                        break;
+                    case 2: MainActivity.selectedRover = "spirit";
+                        break;
+                }
 
                 Camera.selectedRover = position;
                 Log.d(TAG, "roverButton set");
