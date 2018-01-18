@@ -60,12 +60,13 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        MainActivity.selectedDate = year + "-" + monthOfYear+1 + "-" + dayOfMonth;
+        monthOfYear = monthOfYear + 1;
+        MainActivity.selectedDate = year + "-" + monthOfYear + "-" + dayOfMonth;
         Log.d(TAG, MainActivity.selectedDate);
         SelectCameraFragment scf = new SelectCameraFragment();
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.addToBackStack("this");
+        ft.addToBackStack("selectCameraFragment");
         ft.detach(fm.findFragmentByTag("addRover"));
         ft.replace(R.id.frame1, scf).commit();
     }

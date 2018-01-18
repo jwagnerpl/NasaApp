@@ -1,5 +1,7 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -16,6 +18,7 @@ import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
 import teamtreehouse.com.nasaapp.api.ApiCall;
 import teamtreehouse.com.nasaapp.date_model.Camera;
+import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
@@ -24,6 +27,7 @@ public class SelectCameraFragment extends android.app.Fragment implements RoverC
     RecyclerView recyclerView;
     RoverCameraRecylerAdapter roverCameraRecylerAdapter;
     ArrayList<Camera> cameras;
+    public static ArrayList<Photo> photos;
     int columns;
 
 
@@ -71,6 +75,18 @@ public class SelectCameraFragment extends android.app.Fragment implements RoverC
         Log.d(TAG, MainActivity.selectedDate);
         Log.d(TAG, MainActivity.selectedRover);
         ApiCall apiCall = new ApiCall();
-        apiCall.getPhotos(MainActivity.selectedRover,MainActivity.selectedDate,cameras.get(position).getCamAbbreviation());
+        apiCall.getPhotos(MainActivity.selectedRover,MainActivity.selectedDate,cameras.get(position).getCamAbbreviation(),getFragmentManager());
+    }
+
+    public static void startImageRecyclerFragment(FragmentManager fragmentManager){
+        RoverImageRecyclerFragment rirf = new RoverImageRecyclerFragment();
+        FragmentManager fm = fragmentManager;
+        FragmentTransaction ft = fm.beginTransaction();
+        Log.d(TAG, "fragmentO");
+        //ft.  // addToBackStack("roverImageRecyclerFragment");
+        //ft.detach(fm.findFragmentByTag("selectCameraFragment"));
+        ft.replace(R.id.frame1,rirf);
+        //ft.addToBackStack("roverImageRecyclerFragment");
+        ft.commit();
     }
 }

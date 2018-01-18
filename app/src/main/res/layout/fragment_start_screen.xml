@@ -49,20 +49,6 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="108dp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/launchButton"
-            fontPath="bitter_regular.ttf"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_background"
-            android:padding="15dp"
-            android:text="@string/blast_off"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rocketImageView"
-            tools:ignore="MissingPrefix" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

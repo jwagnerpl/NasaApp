@@ -32,7 +32,6 @@ public class MainFragment extends android.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // int page = getArguments().getInt(ARG_PAGE);
     }
 
     @Override

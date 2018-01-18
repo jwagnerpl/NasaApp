@@ -39,17 +39,9 @@ public class StartScreenFragment extends android.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        launchButton = view.findViewById(R.id.launchButton);
 
         ApiCall apiCall = new ApiCall();
         apiCall.getDates();
-
-        launchButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                view.setBackgroundColor(getResources().getColor(R.color.white));
-            }
-        });
 
         Handler handler = new Handler();
         waitFiveSeconds(handler);

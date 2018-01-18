@@ -10,9 +10,11 @@ import android.view.Window;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
+import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.fragments.StartScreenFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static ArrayList<CraftDates> craftDates;
     public static String selectedDate;
     public static String selectedRover;
+    public static ArrayList<Photo> photoList;
 
     @Override
     protected void attachBaseContext(Context newBase) {
