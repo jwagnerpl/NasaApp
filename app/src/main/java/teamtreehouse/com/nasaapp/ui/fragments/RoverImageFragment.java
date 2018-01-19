@@ -68,6 +68,6 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack("selectCameraFragment");
         ft.detach(fm.findFragmentByTag("addRover"));
-        ft.attach(scf).commit();
+        ft.replace(R.id.frame1, scf).commit();
     }
 }
