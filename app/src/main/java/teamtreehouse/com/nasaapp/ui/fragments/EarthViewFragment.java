@@ -1,17 +1,34 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
 
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class EarthViewFragment extends android.app.Fragment {
 
     private static final java.lang.String ARG_PAGE = "ARGPage";
+    Button submitButton;
+    EditText addressFieldEditText;
+    private static final String TAG = "EarthViewFragment";
+    private Handler handler;
+    String coordinates;
 
     @Nullable
     @Override
@@ -23,6 +40,43 @@ public class EarthViewFragment extends android.app.Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        submitButton = view.findViewById(R.id.coordinateSubmitButton);
+        addressFieldEditText = view.findViewById(R.id.addressInput);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String address = addressFieldEditText.getText().toString();
+
+                class GetCoordinatesTask extends AsyncTask<Void,Void,Void>{
+                    String address;
+
+                    public GetCoordinatesTask(String address) {
+                        this.address = address;
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        coordinates = getCoordinates(address);
+                        Log.d(TAG, coordinates);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        if(!coordinates.equals("")){
+                            Toast.makeText(getActivity().getApplicationContext(), coordinates, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                new GetCoordinatesTask(address).execute();
+
+            }
+
+        });
     }
 
     @Override
@@ -40,4 +94,25 @@ public class EarthViewFragment extends android.app.Fragment {
             ev.setArguments(args);
             return ev;
     }
+    String getCoordinates(String address) {
+        Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocationName(address, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            addresses = null;
+        }
+        if (addresses.size() > 0) {
+            double latitude = addresses.get(0).getLatitude();
+            double longitude = addresses.get(0).getLongitude();
+            Log.d(TAG, latitude + "" + longitude + "" + " this is the coordinates");
+            return latitude + "" + longitude + "";
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Sorry, invalid address" + address,Toast.LENGTH_LONG).show();
+            return "";
+        }
+    }
+
 }
