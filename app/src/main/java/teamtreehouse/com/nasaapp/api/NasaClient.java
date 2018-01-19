@@ -5,10 +5,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
+import teamtreehouse.com.nasaapp.earth_model.EarthPhoto;
 import teamtreehouse.com.nasaapp.photo_model.Photos;
 
 public interface NasaClient {
     String NASA_PHOTOS_BASE_URI = "https://api.nasa.gov/mars-photos/api/v1/";
+    String NASA_EARTH_BASE_URI = "https://api.nasa.gov/planetary/earth/imagery?lon=100.75&lat=1.5&date=2014-02-01&cloud_score=True&api_key=DEMO_KEY";
     String API_KEY = "N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk";
 
     @GET("manifests/curiosity?api_key=N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk")
@@ -22,4 +24,7 @@ public interface NasaClient {
 
     @GET("rovers/{rover}/photos?api_key=N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk")
     Observable<Photos> getRequestedPhotos(@Path("rover") String rover, @Query("earth_date") String earthDate, @Query("camera") String camAbbrev);
+
+    @GET("?api_key=N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk")
+    Observable<EarthPhoto> getEarthPhoto(@Query("date") String date, @Query("lat") String latitude, @Query("lon") String longitude);
 }

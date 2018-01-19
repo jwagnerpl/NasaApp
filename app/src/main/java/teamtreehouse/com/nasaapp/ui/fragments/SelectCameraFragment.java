@@ -35,9 +35,6 @@ public class SelectCameraFragment extends android.app.Fragment implements RoverC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_camera, container, false);
-        ViewPager viewPager = getActivity().findViewById(R.id.roverViewPager);
-        ViewGroup vg = (ViewGroup) viewPager.getParent();
-        //Zvg.removeView(viewPager);
         return view;
     }
 

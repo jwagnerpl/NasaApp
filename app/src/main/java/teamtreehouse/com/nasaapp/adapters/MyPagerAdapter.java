@@ -144,12 +144,12 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
 
                 switch (position) {
                     case 0:
-                        maxCalendar.setTimeInMillis(opportunityMaxDate);
-                        minCalendar.setTimeInMillis(opportunityLandDate);
-                        break;
-                    case 1:
                         maxCalendar.setTimeInMillis(curiosityMaxDate);
                         minCalendar.setTimeInMillis(curiosityLandDate);
+                        break;
+                    case 1:
+                        maxCalendar.setTimeInMillis(opportunityMaxDate);
+                        minCalendar.setTimeInMillis(opportunityLandDate);
                         break;
                     case 2:
                         maxCalendar.setTimeInMillis(spiritMaxDate);
