@@ -13,4 +13,9 @@
     <string name="spirit_max_date"> spirit_max_date </string>
     <string name="curiosity_min_date"> curiosity_min_date </string>
     <string name="curiosity_max_date"> curiosity_max_date </string>
+    <string name="enter_address">Enter address</string>
+    <string name="address">Address</string>
+    <string name="get_coordinates">Get Coordinates</string>
+    <string name="get_a_picture_of_earth">Get a picture of Earth from space!</string>
+    <string name="date_mm_dd_yyyy">Date - MM/DD/YYYY</string>
 </resources>
