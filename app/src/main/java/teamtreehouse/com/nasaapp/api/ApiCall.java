@@ -3,6 +3,7 @@ package teamtreehouse.com.nasaapp.api;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
+import teamtreehouse.com.nasaapp.earth_model.EarthPhoto;
 import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.photo_model.Photos;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
@@ -33,17 +35,43 @@ import static teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment.context;
 
 public class ApiCall extends Fragment {
 
-    String curiosityLandDate;
-    String curiosityMaxDate;
-    String opportunityLandDate;
-    String opportunityMaxDate;
-    String spiritLandDate;
-    String spiritMaxDate;
-    SharedPreferences sharedPreferences;
     private static final String TAG = "ApiCall";
     private ArrayList<Photo> photoList;
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
+
+    public void getEarthSnapshot(String date, String latitude, String longitude, Context context){
+
+        Observer observer = new Observer() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            Log.d(TAG, "subscribed");
+            }
+
+            @Override
+            public void onNext(Object value) {
+            EarthPhoto earthPhoto = (EarthPhoto) value;
+            MainActivity.earthUri = earthPhoto.getUrl();
+            if(MainActivity.earthUri == null)Toast.makeText(context,"Sorry, no views found. Choose a different date.", Toast.LENGTH_LONG).show();
+            else{Log.d(TAG, MainActivity.earthUri);}
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "error getting earthview" + e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "Earthsnapshot complete");
+            }
+        };
+
+        NasaClient nasaClient = getNasaClient(NasaClient.NASA_EARTH_BASE_URI);
+        Observable<EarthPhoto> photoCall = nasaClient.getEarthPhoto(date,latitude,longitude);
+        photoCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+    }
 
     public void getPhotos(String craft, String date, String abbrev, FragmentManager fm){
 
@@ -90,7 +118,7 @@ public class ApiCall extends Fragment {
             }
         };
 
-        NasaClient nasaClient = getNasaClient();
+        NasaClient nasaClient = getNasaClient(NasaClient.NASA_PHOTOS_BASE_URI);
         Observable<Photos> photoCall = nasaClient.getRequestedPhotos(craft, date, abbrev);
         photoCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
     }
@@ -133,7 +161,7 @@ public class ApiCall extends Fragment {
             }
         };
 
-        NasaClient nasaClient = getNasaClient();
+        NasaClient nasaClient = getNasaClient(NasaClient.NASA_PHOTOS_BASE_URI);
         Observable<DateRangeData> curiosityCall = nasaClient.getCuriosityDateRange();
         Observable<DateRangeData> opportunityCall = nasaClient.getOpportunityDateRange();
         Observable<DateRangeData> spiritCall = nasaClient.getSpiritDateRange();
@@ -145,9 +173,9 @@ public class ApiCall extends Fragment {
         return craftDates;
     }
 
-    private NasaClient getNasaClient() {
+    private NasaClient getNasaClient(String uri) {
         Retrofit.Builder builder = new Retrofit.Builder().
-                baseUrl(NasaClient.NASA_PHOTOS_BASE_URI).
+                baseUrl(uri).
                 addConverterFactory(GsonConverterFactory.create()).
                 addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         Retrofit retrofit = builder.build();

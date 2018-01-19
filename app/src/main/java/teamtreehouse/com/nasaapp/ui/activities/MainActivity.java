@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static String selectedDate;
     public static String selectedRover;
     public static ArrayList<Photo> photoList;
+    public static String earthUri;
 
     @Override
     protected void attachBaseContext(Context newBase) {

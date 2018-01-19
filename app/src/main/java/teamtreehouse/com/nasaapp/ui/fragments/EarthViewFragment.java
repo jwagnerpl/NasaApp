@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.api.ApiCall;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class EarthViewFragment extends android.app.Fragment {
@@ -29,6 +30,7 @@ public class EarthViewFragment extends android.app.Fragment {
     private static final String TAG = "EarthViewFragment";
     private Handler handler;
     String coordinates;
+    private EditText dateFieldEditText;
 
     @Nullable
     @Override
@@ -42,12 +44,14 @@ public class EarthViewFragment extends android.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
         submitButton = view.findViewById(R.id.coordinateSubmitButton);
         addressFieldEditText = view.findViewById(R.id.addressInput);
+        dateFieldEditText = view.findViewById(R.id.dateInput);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String address = addressFieldEditText.getText().toString();
+                String date = dateFieldEditText.getText().toString();
 
                 class GetCoordinatesTask extends AsyncTask<Void,Void,Void>{
                     String address;
@@ -67,7 +71,11 @@ public class EarthViewFragment extends android.app.Fragment {
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
                         if(!coordinates.equals("")){
+                            String[] latlong = coordinates.split(";");
+                            ApiCall apiCall = new ApiCall();
+                            apiCall.getEarthSnapshot(date,latlong[0],latlong[1],getActivity());
                             Toast.makeText(getActivity().getApplicationContext(), coordinates, Toast.LENGTH_LONG).show();
+
                         }
                     }
                 }
@@ -107,7 +115,7 @@ public class EarthViewFragment extends android.app.Fragment {
             double latitude = addresses.get(0).getLatitude();
             double longitude = addresses.get(0).getLongitude();
             Log.d(TAG, latitude + "" + longitude + "" + " this is the coordinates");
-            return latitude + "" + longitude + "";
+            return latitude + ";" + longitude;
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(), "Sorry, invalid address" + address,Toast.LENGTH_LONG).show();
