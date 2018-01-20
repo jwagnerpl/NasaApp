@@ -75,6 +75,8 @@ public class EarthViewFragment extends android.app.Fragment {
                             ApiCall apiCall = new ApiCall();
                             apiCall.getEarthSnapshot(date,latlong[0],latlong[1],getActivity(), getFragmentManager());
                         }
+                        else{Toast.makeText(getActivity().getApplicationContext(), "Try a different address.",Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -115,7 +117,6 @@ public class EarthViewFragment extends android.app.Fragment {
             return latitude + ";" + longitude;
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(), "Sorry, invalid address" + address,Toast.LENGTH_LONG).show();
             return "";
         }
     }
