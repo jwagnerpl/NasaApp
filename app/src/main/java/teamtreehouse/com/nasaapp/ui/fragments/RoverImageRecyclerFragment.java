@@ -1,16 +1,22 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.annotation.RequiresApi;
+import android.support.v13.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,21 +29,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.ItemClickListener;
-import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
 import teamtreehouse.com.nasaapp.adapters.RoverImageRecyclerAdapter;
 import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.support.v4.content.PermissionChecker.checkSelfPermission;
+
 public class RoverImageRecyclerFragment extends android.app.Fragment implements ItemClickListener{
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_PERMISSION = 1;
     RecyclerView recyclerView;
     RoverImageRecyclerAdapter adapter;
     ArrayList<Photo> photos;
@@ -90,9 +101,9 @@ public class RoverImageRecyclerFragment extends android.app.Fragment implements 
 
         alertDialog.setView(ll);
         alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getActivity(),"Message sent",Toast.LENGTH_LONG);
                 TextView tv = view.findViewById(R.id.imageOverlayText);
                 tv.setText(input.getText());
                 tv.setDrawingCacheEnabled(true);
@@ -102,12 +113,24 @@ public class RoverImageRecyclerFragment extends android.app.Fragment implements 
                 BitmapDrawable bm = (BitmapDrawable)iv.getDrawable();
                 Bitmap bitmap = bm.getBitmap();
                 Bitmap bmCombined = combineImages(bitmap,tvCacheBm);
-                createBitmapFile("21331212",bmCombined);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_PERMISSION);
+                    return;
+                }
+
+                shareBitmap(bmCombined, "mybitmap");
+
+                String pathofBmp = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bmCombined,"title", null);
+                Uri bmpUri = Uri.parse(pathofBmp);
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto","abc@gmail.com", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                        "mailto",email.getText().toString(), null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Awesome Mars Photo");
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey there, check out my attachment of a great Mars photo I picked for you thanks to the iNeedSpace app. Enjoy!");
+                emailIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
@@ -129,10 +152,15 @@ public class RoverImageRecyclerFragment extends android.app.Fragment implements 
         return cs;
     }
 
-    void createBitmapFile(String filename, Bitmap bmp){
+    URI createBitmapFile(String filename, Bitmap bmp){
+        File directory = getActivity().getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(filename);
+            out = new FileOutputStream(mypath);
+            Log.d(TAG, mypath.toString());
             bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
             // PNG is a lossless format, the compression factor (100) is ignored
         } catch (Exception e) {
@@ -146,6 +174,26 @@ public class RoverImageRecyclerFragment extends android.app.Fragment implements 
                 e.printStackTrace();
             }
         }
+        return mypath.toURI();
+    }
+
+    private void shareBitmap (Bitmap bitmap,String fileName) {
+        try {
+            File file = new File(getActivity().getCacheDir(), fileName + ".png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            final Intent intent = new Intent(     android.content.Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.setType("image/png");
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
 }
