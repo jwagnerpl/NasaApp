@@ -74,7 +74,6 @@ public class EarthViewFragment extends android.app.Fragment {
                             String[] latlong = coordinates.split(";");
                             ApiCall apiCall = new ApiCall();
                             apiCall.getEarthSnapshot(date,latlong[0],latlong[1],getActivity(), getFragmentManager());
-                            Toast.makeText(getActivity().getApplicationContext(), coordinates, Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -113,7 +112,6 @@ public class EarthViewFragment extends android.app.Fragment {
         if (addresses.size() > 0) {
             double latitude = addresses.get(0).getLatitude();
             double longitude = addresses.get(0).getLongitude();
-            Log.d(TAG, latitude + "" + longitude + "" + " this is the coordinates");
             return latitude + ";" + longitude;
         }
         else{

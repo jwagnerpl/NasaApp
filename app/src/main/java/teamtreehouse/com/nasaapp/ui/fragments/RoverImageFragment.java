@@ -55,7 +55,7 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
         }
 
         viewPager = getView().findViewById(R.id.roverViewPager);
-        viewPager.setAdapter(new MyPagerAdapter(imageArray, getActivity().getApplicationContext(), getActivity()));
+        viewPager.setAdapter(new MyPagerAdapter(imageArray, getActivity().getApplicationContext()));
     }
 
     @Override

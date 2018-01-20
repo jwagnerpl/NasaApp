@@ -1,12 +1,11 @@
 package teamtreehouse.com.nasaapp.adapters;
 
 import teamtreehouse.com.nasaapp.ui.fragments.EarthFrameFragment;
-import teamtreehouse.com.nasaapp.ui.fragments.EarthViewFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverFrameFragment;
 
 public class MyFragmentPagerAdapter extends android.support.v13.app.FragmentPagerAdapter {
     int NUMBER_ITEMS = 2;
-    private String tabTitles[] = new String[] {"Mars Rover", "Eye in the Sky"};
+    private String tabTitles[] = new String[]{"Mars Rover", "Eye in the Sky"};
 
     public MyFragmentPagerAdapter(android.app.FragmentManager fm) {
         super(fm);
@@ -14,7 +13,7 @@ public class MyFragmentPagerAdapter extends android.support.v13.app.FragmentPage
 
     @Override
     public android.app.Fragment getItem(int position) {
-        switch(position){
+        switch (position) {
             case 0:
                 return RoverFrameFragment.newInstance(0, "Rover Image");
 

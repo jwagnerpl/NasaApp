@@ -43,20 +43,28 @@ public class ApiCall extends Fragment {
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
 
-    public void getEarthSnapshot(String date, String latitude, String longitude, Context context, FragmentManager fm){
+
+    //
+    // CALL TO GET EARTH SNAPSHOT ONCLICK FROM EARTHVIEW FRAGMENT AND DISPLAYS IN EARTHFRAMEFRAGMENT
+    //
+
+    public void getEarthSnapshot(String date, String latitude, String longitude, Context context, FragmentManager fm) {
 
         Observer observer = new Observer() {
             @Override
             public void onSubscribe(Disposable d) {
-            Log.d(TAG, "subscribed");
+                Log.d(TAG, "subscribed");
             }
 
             @Override
             public void onNext(Object value) {
-            EarthPhoto earthPhoto = (EarthPhoto) value;
-            MainActivity.earthUri = earthPhoto.getUrl();
-            if(MainActivity.earthUri == null)Toast.makeText(context,"Sorry, no views found. Choose a different date.", Toast.LENGTH_LONG).show();
-            else{Log.d(TAG, MainActivity.earthUri);}
+                EarthPhoto earthPhoto = (EarthPhoto) value;
+                MainActivity.earthUri = earthPhoto.getUrl();
+                if (MainActivity.earthUri == null)
+                    Toast.makeText(context, "Sorry, no views found. Choose a different date.", Toast.LENGTH_LONG).show();
+                else {
+                    Log.d(TAG, MainActivity.earthUri);
+                }
             }
 
             @Override
@@ -66,23 +74,27 @@ public class ApiCall extends Fragment {
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "Earthsnapshot complete");
-                DisplayEarthPhoto dep = new DisplayEarthPhoto();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.addToBackStack("earthSnapshot");
-                ft.replace(R.id.earthFrame1,dep).commit();
+                if (MainActivity.earthUri != null) {
+                    DisplayEarthPhoto dep = new DisplayEarthPhoto();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.addToBackStack("earthSnapshot");
+                    ft.replace(R.id.earthFrame1, dep).commit();
+                }
             }
         };
 
         NasaClient nasaClient = getNasaClient(NasaClient.NASA_EARTH_BASE_URI);
-        Observable<EarthPhoto> photoCall = nasaClient.getEarthPhoto(date,latitude,longitude);
+        Observable<EarthPhoto> photoCall = nasaClient.getEarthPhoto(date, latitude, longitude);
         photoCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
     }
 
-    public void getPhotos(String craft, String date, String abbrev, FragmentManager fm){
+    //
+    // GETS PHOTOS AFTER CAMERA CLICK IN SELECT CAMERA FRAGMENT - IF NOT NULL STARTS ROVERIMAGERECYCLERFRAGMENT
+    //
+    public void getPhotos(String craft, String date, String abbrev, FragmentManager fm) {
 
 
-        Observer observer = new Observer(){
+        Observer observer = new Observer() {
 
             @Override
             public void onSubscribe(Disposable d) {
@@ -92,14 +104,14 @@ public class ApiCall extends Fragment {
             @Override
             public void onNext(Object value) {
                 Log.d(TAG, value.toString());
-            Photos photos = (Photos) value;
-            Log.d(TAG, photos.toString() + "here are photos");
-            Log.d(TAG, photos.getPhotos().toString() + "here is get photos");
-            for(Photo photo: photos.getPhotos()){
-                photo.getImgSrc();
-                Log.d(TAG, photo.toString());
-                photoList.add(photo);
-            }
+                Photos photos = (Photos) value;
+                Log.d(TAG, photos.toString() + "here are photos");
+                Log.d(TAG, photos.getPhotos().toString() + "here is get photos");
+                for (Photo photo : photos.getPhotos()) {
+                    photo.getImgSrc();
+                    Log.d(TAG, photo.toString());
+                    photoList.add(photo);
+                }
 
             }
 
@@ -110,15 +122,12 @@ public class ApiCall extends Fragment {
 
             @Override
             public void onComplete() {
-                if(photoList.size() != 0) {
-                    Log.d(TAG, photoList.toString() + "this is the photo list");
+                if (photoList.size() != 0) {
                     MainActivity.photoList = photoList;
                     SelectCameraFragment scf = new SelectCameraFragment();
                     SelectCameraFragment.startImageRecyclerFragment(fm);
-                }
-
-                else{
-                    Toast.makeText(context,"sorry, choose another camera.", Toast.LENGTH_LONG );
+                } else {
+                    Toast.makeText(context, "No photos found. Choose another camera or date.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -130,6 +139,9 @@ public class ApiCall extends Fragment {
     }
 
 
+    //
+    // GETS ALL POSSIBLE DATES FOR EACH ROVER
+    //
     public ArrayList<CraftDates> getDates() {
 
         MainActivity mainActivity = new MainActivity();
@@ -159,11 +171,12 @@ public class ApiCall extends Fragment {
 
             @Override
             public void onComplete() {
-                if(craftDates.size() == 3){
+                if (craftDates.size() == 3) {
                     Log.d(TAG, "we have 3");
                     MainActivity.craftDates = craftDates;
+                } else {
+                    Log.d(TAG, craftDates.size() + "");
                 }
-                else{Log.d(TAG, craftDates.size() + "");}
             }
         };
 

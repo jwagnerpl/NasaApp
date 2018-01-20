@@ -41,7 +41,7 @@
             android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/date_mm_dd_yyyy"
+            android:hint="@string/select_date_yyyy_mm_dd"
             />
 
     </android.support.design.widget.TextInputLayout>

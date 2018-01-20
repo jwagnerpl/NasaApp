@@ -10,7 +10,6 @@ import android.view.Window;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;

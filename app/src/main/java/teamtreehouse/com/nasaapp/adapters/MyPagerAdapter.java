@@ -30,30 +30,25 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
 
     private ArrayList<Integer> images;
     private Fragment fragment;
-    Calendar minCalendar;
-    Calendar maxCalendar;
+    private Calendar minCalendar;
+    private Calendar maxCalendar;
     private LayoutInflater inflater;
-    public static Context context;
-    private Activity activity;
-    Long curiosityLandDate;
-    Long curiosityMaxDate;
-    Long opportunityLandDate;
-    Long opportunityMaxDate;
-    Long spiritLandDate;
-    Long spiritMaxDate;
-    FragmentManager fm;
-    Calendar maxDate;
-    Calendar minDate;
+    private Context context;
+    private Long curiosityLandDate;
+    private Long curiosityMaxDate;
+    private Long opportunityLandDate;
+    private Long opportunityMaxDate;
+    private Long spiritLandDate;
+    private Long spiritMaxDate;
+    private FragmentManager fm;
+
 
     private static final String TAG = "MyPagerAdapter";
 
-    public MyPagerAdapter(ArrayList<Integer> images, Context context, Activity activity) {
+    public MyPagerAdapter(ArrayList<Integer> images, Context context) {
         this.images = images;
-        this.fragment = fragment;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.fm = fm;
-        this.activity = activity;
     }
 
     @Override
@@ -103,10 +98,10 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
         final Button roverButton = imageLayout.findViewById(R.id.roverButton);
         switch (position) {
             case 0:
-                roverButton.setText("Opportunity \n Select this rover.");
+                roverButton.setText("Curiosity \n Select this rover.");
                 break;
             case 1:
-                roverButton.setText("Curiosity \n Select this rover.");
+                roverButton.setText("Opportunity \n Select this rover.");
                 break;
             case 2:
                 roverButton.setText("Spirit \n Select this rover.");
