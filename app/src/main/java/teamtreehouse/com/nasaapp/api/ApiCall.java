@@ -20,6 +20,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
@@ -27,6 +28,7 @@ import teamtreehouse.com.nasaapp.earth_model.EarthPhoto;
 import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.photo_model.Photos;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
+import teamtreehouse.com.nasaapp.ui.fragments.DisplayEarthPhoto;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverImageRecyclerFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.SelectCameraFragment;
 
@@ -40,7 +42,7 @@ public class ApiCall extends Fragment {
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
 
-    public void getEarthSnapshot(String date, String latitude, String longitude, Context context){
+    public void getEarthSnapshot(String date, String latitude, String longitude, Context context, FragmentManager fm){
 
         Observer observer = new Observer() {
             @Override
@@ -54,7 +56,6 @@ public class ApiCall extends Fragment {
             MainActivity.earthUri = earthPhoto.getUrl();
             if(MainActivity.earthUri == null)Toast.makeText(context,"Sorry, no views found. Choose a different date.", Toast.LENGTH_LONG).show();
             else{Log.d(TAG, MainActivity.earthUri);}
-
             }
 
             @Override
@@ -65,6 +66,10 @@ public class ApiCall extends Fragment {
             @Override
             public void onComplete() {
                 Log.d(TAG, "Earthsnapshot complete");
+                DisplayEarthPhoto dep = new DisplayEarthPhoto();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.addToBackStack("earthSnapshot");
+                ft.replace(R.id.earthFrame1,dep).commit();
             }
         };
 

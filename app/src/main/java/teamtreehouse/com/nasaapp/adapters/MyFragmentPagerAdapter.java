@@ -1,8 +1,8 @@
 package teamtreehouse.com.nasaapp.adapters;
 
+import teamtreehouse.com.nasaapp.ui.fragments.EarthFrameFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.EarthViewFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.RoverFrameFragment;
-import teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment;
 
 public class MyFragmentPagerAdapter extends android.support.v13.app.FragmentPagerAdapter {
     int NUMBER_ITEMS = 2;
@@ -19,7 +19,7 @@ public class MyFragmentPagerAdapter extends android.support.v13.app.FragmentPage
                 return RoverFrameFragment.newInstance(0, "Rover Image");
 
             case 1:
-                return EarthViewFragment.newInstance(0, "Earth View");
+                return EarthFrameFragment.newInstance(0, "Earth View");
         }
 
         return null;

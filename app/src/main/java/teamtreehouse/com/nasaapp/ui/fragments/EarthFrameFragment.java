@@ -11,27 +11,27 @@ import android.view.ViewGroup;
 
 import teamtreehouse.com.nasaapp.R;
 
-public class RoverFrameFragment extends Fragment {
+public class EarthFrameFragment extends Fragment {
 
     String frame;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_container, container, false);
+        View view = inflater.inflate(R.layout.earth_fragment_container, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        RoverImageFragment rif = new RoverImageFragment();
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame1, rif, "addRover").commit();
+            EarthViewFragment rif = new EarthViewFragment();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.earthFrame1, rif, "addEarthView").commit();
     }
 
-    public static RoverFrameFragment newInstance(int page, String title) {
-        RoverFrameFragment rf = new RoverFrameFragment();
+    public static EarthFrameFragment newInstance(int page, String title) {
+        EarthFrameFragment rf = new EarthFrameFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle",title);

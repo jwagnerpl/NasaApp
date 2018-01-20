@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context="teamtreehouse.com.nasaapp.ui.fragments.DisplayEarthPhoto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/earthImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_rocket" />
 
 </FrameLayout>

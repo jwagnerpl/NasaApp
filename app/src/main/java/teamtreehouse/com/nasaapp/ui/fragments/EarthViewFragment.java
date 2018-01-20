@@ -73,9 +73,8 @@ public class EarthViewFragment extends android.app.Fragment {
                         if(!coordinates.equals("")){
                             String[] latlong = coordinates.split(";");
                             ApiCall apiCall = new ApiCall();
-                            apiCall.getEarthSnapshot(date,latlong[0],latlong[1],getActivity());
+                            apiCall.getEarthSnapshot(date,latlong[0],latlong[1],getActivity(), getFragmentManager());
                             Toast.makeText(getActivity().getApplicationContext(), coordinates, Toast.LENGTH_LONG).show();
-
                         }
                     }
                 }
@@ -90,7 +89,7 @@ public class EarthViewFragment extends android.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int page = getArguments().getInt(ARG_PAGE);
+//        int page = getArguments().getInt(ARG_PAGE);
     }
 
     public static EarthViewFragment newInstance(int page, String title) {
