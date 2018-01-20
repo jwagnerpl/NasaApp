@@ -27,14 +27,37 @@
             android:maxLines="2"
             tools:text="title" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:padding="5dp"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            android:id="@+id/roverImage"
-            android:src="@drawable/ic_rocket"
-            />
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/relativelayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:id="@+id/roverImage"
+                android:src="@drawable/ic_rocket"
+                />
+
+            <TextView
+                android:id="@+id/imageOverlayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/roverImage"
+                android:layout_alignTop="@id/roverImage"
+                android:layout_alignRight="@id/roverImage"
+                android:layout_alignBottom="@id/roverImage"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#000000" />
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 

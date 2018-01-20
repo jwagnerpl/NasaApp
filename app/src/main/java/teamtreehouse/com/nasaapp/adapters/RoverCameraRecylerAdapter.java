@@ -35,37 +35,47 @@ public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraR
 
         if (Camera.selectedRover == 1 || Camera.selectedRover == 2) {
             switch (cameras.get(position).getCamAbbreviation()) {
-                case "fhaz": holder.imageView.setImageResource(R.drawable.spirit_front_hazcam);
-                break;
-                case "rhaz": holder.imageView.setImageResource(R.drawable.spirit_rear_hazcam);
-                break;
-                case "navcam": holder.imageView.setImageResource(R.drawable.spirit_navcam);
-                break;
-                case "pancam": holder.imageView.setImageResource(R.drawable.spirit_panoramic);
-                break;
-                case "minitest": holder.imageView.setImageResource(R.drawable.spirit_micro);
-                break;
+                case "fhaz":
+                    holder.imageView.setImageResource(R.drawable.spirit_front_hazcam);
+                    break;
+                case "rhaz":
+                    holder.imageView.setImageResource(R.drawable.spirit_rear_hazcam);
+                    break;
+                case "navcam":
+                    holder.imageView.setImageResource(R.drawable.spirit_navcam);
+                    break;
+                case "pancam":
+                    holder.imageView.setImageResource(R.drawable.spirit_panoramic);
+                    break;
+                case "minitest":
+                    holder.imageView.setImageResource(R.drawable.spirit_micro);
+                    break;
             }
-        }
-
-        else{
+        } else {
             Log.d(TAG, cameras.get(position).getCamAbbreviation());
-            switch(cameras.get(position).getCamAbbreviation()){
+            switch (cameras.get(position).getCamAbbreviation()) {
 
-                case "fhaz": holder.imageView.setImageResource(R.drawable.curiosity_front_hazcam);
-                break;
-                case "rhaz": holder.imageView.setImageResource(R.drawable.curiosity_rear_hazcam);
-                break;
-                case "mast": holder.imageView.setImageResource(R.drawable.curiosity_mast_cam);
-                break;
-                case "chemcam": holder.imageView.setImageResource(R.drawable.curiosity_chemcam);
-                break;
-                case "mahli": holder.imageView.setImageResource(R.drawable.curiosity_mahli);
-                break;
-                case "mardi": holder.imageView.setImageResource(R.drawable.curiosity_mardi);
-                break;
-                case "navcam": holder.imageView.setImageResource(R.drawable.curiosity_navcam);
-                break;
+                case "fhaz":
+                    holder.imageView.setImageResource(R.drawable.curiosity_front_hazcam);
+                    break;
+                case "rhaz":
+                    holder.imageView.setImageResource(R.drawable.curiosity_rear_hazcam);
+                    break;
+                case "mast":
+                    holder.imageView.setImageResource(R.drawable.curiosity_mast_cam);
+                    break;
+                case "chemcam":
+                    holder.imageView.setImageResource(R.drawable.curiosity_chemcam);
+                    break;
+                case "mahli":
+                    holder.imageView.setImageResource(R.drawable.curiosity_mahli);
+                    break;
+                case "mardi":
+                    holder.imageView.setImageResource(R.drawable.curiosity_mardi);
+                    break;
+                case "navcam":
+                    holder.imageView.setImageResource(R.drawable.curiosity_navcam);
+                    break;
             }
 
         }
@@ -90,20 +100,14 @@ public class RoverCameraRecylerAdapter extends RecyclerView.Adapter<RoverCameraR
 
         @Override
         public void onClick(View view) {
-            if(itemClickListener != null){
+            if (itemClickListener != null) {
                 itemClickListener.onItemClick(view, getAdapterPosition());
             }
         }
     }
 
-
-
-    public void setClickListener(ItemClickListener itemClickListener){
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
-    }
-
-    public interface ItemClickListener{
-        void onItemClick(View view, int position);
     }
 
 }

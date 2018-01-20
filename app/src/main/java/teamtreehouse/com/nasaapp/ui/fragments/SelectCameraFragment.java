@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.adapters.ItemClickListener;
 import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
 import teamtreehouse.com.nasaapp.api.ApiCall;
 import teamtreehouse.com.nasaapp.date_model.Camera;
@@ -22,7 +23,7 @@ import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
 
-public class SelectCameraFragment extends android.app.Fragment implements RoverCameraRecylerAdapter.ItemClickListener {
+public class SelectCameraFragment extends android.app.Fragment implements ItemClickListener {
     private static final String TAG = "SelectCameraFragment";
     RecyclerView recyclerView;
     RoverCameraRecylerAdapter roverCameraRecylerAdapter;
