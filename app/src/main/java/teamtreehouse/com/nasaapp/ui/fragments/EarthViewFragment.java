@@ -4,7 +4,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,25 +21,21 @@ import teamtreehouse.com.nasaapp.api.ApiCall;
 
 public class EarthViewFragment extends android.app.Fragment {
 
-    private static final java.lang.String ARG_PAGE = "ARGPage";
-    Button submitButton;
-    EditText addressFieldEditText;
+    private EditText addressFieldEditText;
     private static final String TAG = "EarthViewFragment";
-    private Handler handler;
-    String coordinates;
+    private String coordinates;
     private EditText dateFieldEditText;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_earth_view, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_earth_view, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        submitButton = view.findViewById(R.id.coordinateSubmitButton);
+        Button submitButton = view.findViewById(R.id.coordinateSubmitButton);
         addressFieldEditText = view.findViewById(R.id.addressInput);
         dateFieldEditText = view.findViewById(R.id.dateInput);
 
@@ -51,10 +46,12 @@ public class EarthViewFragment extends android.app.Fragment {
                 String address = addressFieldEditText.getText().toString();
                 String date = dateFieldEditText.getText().toString();
                 if (address.length() > 2 && date.length() == 10) {
-                    class GetCoordinatesTask extends AsyncTask<Void, Void, Void> {
-                        String address;
 
-                        public GetCoordinatesTask(String address) {
+                    //Async tasks retrieves coordinate call which slows down UI.
+                    class GetCoordinatesTask extends AsyncTask<Void, Void, Void> {
+                        private String address;
+
+                        private GetCoordinatesTask(String address) {
                             this.address = address;
                         }
 
@@ -80,30 +77,14 @@ public class EarthViewFragment extends android.app.Fragment {
 
                     new GetCoordinatesTask(address).execute();
 
-                }
-                else{
-                    Toast.makeText(getActivity(), "Oops, something went wrong. Check your input!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Oops, something went wrong. Check your input!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        int page = getArguments().getInt(ARG_PAGE);
-    }
-
-    public static EarthViewFragment newInstance(int page, String title) {
-
-        EarthViewFragment ev = new EarthViewFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        ev.setArguments(args);
-        return ev;
-    }
-
+    // Method to retrieve coordinates on address input
     String getCoordinates(String address) {
         Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
         List<Address> addresses;
@@ -113,7 +94,7 @@ public class EarthViewFragment extends android.app.Fragment {
             e.printStackTrace();
             addresses = null;
         }
-        if (addresses.size() > 0) {
+        if (addresses != null && addresses.size() > 0) {
             double latitude = addresses.get(0).getLatitude();
             double longitude = addresses.get(0).getLongitude();
             return latitude + ";" + longitude;
