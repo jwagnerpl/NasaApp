@@ -103,11 +103,7 @@ public class ApiCall extends Fragment {
                 Photos photos = (Photos) value;
                 Log.d(TAG, photos.toString() + "here are photos");
                 Log.d(TAG, photos.getPhotos().toString() + "here is get photos");
-                for (Photo photo : photos.getPhotos()) {
-                    photo.getImgSrc();
-                    Log.d(TAG, photo.toString());
-                    photoList.add(photo);
-                }
+                photoList.addAll(photos.getPhotos());
 
             }
 
@@ -120,7 +116,6 @@ public class ApiCall extends Fragment {
             public void onComplete() {
                 if (photoList.size() != 0) {
                     MainActivity.photoList = photoList;
-                    SelectCameraFragment scf = new SelectCameraFragment();
                     SelectCameraFragment.startImageRecyclerFragment(fm);
                 } else {
                     Toast.makeText(context, "No photos found. Choose another camera or date.", Toast.LENGTH_SHORT).show();
@@ -138,9 +133,8 @@ public class ApiCall extends Fragment {
     //
     // GETS ALL POSSIBLE DATES FOR EACH ROVER
     //
-    public ArrayList<CraftDates> getDates() {
+    public void getDates() {
 
-        MainActivity mainActivity = new MainActivity();
         Observer observer = new Observer() {
 
             @Override
@@ -185,7 +179,6 @@ public class ApiCall extends Fragment {
         opportunityCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
         spiritCall.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
 
-        return craftDates;
     }
 
     private NasaClient getNasaClient(String uri) {
