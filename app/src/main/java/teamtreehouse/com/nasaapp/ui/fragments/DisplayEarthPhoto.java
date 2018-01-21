@@ -3,7 +3,6 @@ package teamtreehouse.com.nasaapp.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,28 +15,30 @@ import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class DisplayEarthPhoto extends android.app.Fragment {
-    TextView textView;
+    TextView imageInfoTextview;
+    String earthUri;
+    ImageView iv;
 
     private static final String TAG = "DisplayEarthPhoto";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_display_earth_photo, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_display_earth_photo, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView = getActivity().findViewById(R.id.imageInfo);
-        ImageView iv = getActivity().findViewById(R.id.earthImage);
-        Picasso.with(getActivity()).load(MainActivity.earthUri).into(iv);
-        String string = MainActivity.earthUri;
-        String[] parts = string.split("\\&");
-        String part1 = parts[0]; // 004
-        String part2 = parts[1]; // 034556
-        textView.setText(part1);
-        Log.d(TAG,textView.getText().toString());
+        earthUri = MainActivity.earthUri;
+        iv = getActivity().findViewById(R.id.earthImage);
+        Picasso.with(getActivity()).load(earthUri).into(iv);
+
+
+        // Splits URI returned for earthimage at token so can be compared against expected value in unit test.
+        imageInfoTextview = getActivity().findViewById(R.id.imageInfo);
+        String[] parts = earthUri.split("\\&");
+        imageInfoTextview.setText(parts[0]);
+
     }
 }
