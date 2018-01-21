@@ -18,7 +18,6 @@ import teamtreehouse.com.nasaapp.R;
 import teamtreehouse.com.nasaapp.adapters.MyFragmentPagerAdapter;
 
 public class MainFragment extends android.app.Fragment {
-    private static final java.lang.String ARG_PAGE = "ARG_Page";
     private static final String TAG = "MainFragment";
 
     @Override
@@ -30,6 +29,7 @@ public class MainFragment extends android.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        //Builds copyright notice as dialog builder
         if (item.getItemId() == R.id.copyrightInfo) {
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -38,9 +38,7 @@ public class MainFragment extends android.app.Fragment {
             alertDialog.setMessage("Rover Images and soundclips Courtesy NASA/JPL-Caltech\n\nSpace background photo by Jack Cain on Unsplash\n\nAll images are used for educational purposes only.");
             alertDialog.show();
         }
-
         return false;
-
     }
 
     @Nullable
@@ -49,9 +47,11 @@ public class MainFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         setHasOptionsMenu(true);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.setTitle("iNeedSpace");
+        if (actionBar != null) {
+            actionBar.setTitle("iNeedSpace");
 
-        actionBar.show();
+            actionBar.show();
+        }
         View decorView = getActivity().getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
         decorView.setSystemUiVisibility(uiOptions);
