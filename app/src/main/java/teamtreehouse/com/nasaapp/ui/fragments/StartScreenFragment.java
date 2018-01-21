@@ -59,7 +59,7 @@ public class StartScreenFragment extends android.app.Fragment {
 
         //new FadeInAnimation(logo).setDuration(2000).animate();
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.orbit);
-        mp.start();
+        //mp.start();
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(50,100));
         points.add(new Point(50,-150));

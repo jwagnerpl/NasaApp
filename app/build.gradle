@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
     defaultConfig {
         applicationId "teamtreehouse.com.ineedspace"
         minSdkVersion 14
@@ -16,10 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 
 dependencies {
@@ -40,4 +47,12 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.wdullaer:materialdatetimepicker:3.5.0'
     compile 'com.github.2359media:EasyAndroidAnimations:0.8'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support:support-annotations:25.4.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.1'
+
 }

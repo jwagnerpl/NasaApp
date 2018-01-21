@@ -62,7 +62,8 @@ public class RoverImageFragment extends android.app.Fragment implements DatePick
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         monthOfYear = monthOfYear + 1;
         MainActivity.selectedDate = year + "-" + monthOfYear + "-" + dayOfMonth;
-        Log.d(TAG, MainActivity.selectedDate);
+
+        Log.d(TAG, MainActivity.selectedDate + "here is the date selected");
         SelectCameraFragment scf = new SelectCameraFragment();
         android.app.FragmentManager fragmentManager = view.getFragmentManager();
         android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
