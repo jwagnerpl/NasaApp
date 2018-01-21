@@ -1,7 +1,5 @@
 package teamtreehouse.com.nasaapp.ui.fragments;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.FragmentTransaction;
 import android.graphics.Point;
 import android.media.MediaPlayer;
@@ -13,14 +11,12 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyandroidanimations.library.Animation;
 import com.easyandroidanimations.library.AnimationListener;
-import com.easyandroidanimations.library.BounceAnimation;
 import com.easyandroidanimations.library.ExplodeAnimation;
 import com.easyandroidanimations.library.FadeInAnimation;
 import com.easyandroidanimations.library.PathAnimation;
@@ -59,7 +55,7 @@ public class StartScreenFragment extends android.app.Fragment {
 
         //new FadeInAnimation(logo).setDuration(2000).animate();
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.orbit);
-        //mp.start();
+        mp.start();
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(50,100));
         points.add(new Point(50,-150));

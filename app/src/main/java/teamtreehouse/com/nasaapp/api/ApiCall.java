@@ -4,14 +4,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -21,7 +19,6 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import teamtreehouse.com.nasaapp.R;
-import teamtreehouse.com.nasaapp.adapters.RoverCameraRecylerAdapter;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
@@ -30,7 +27,6 @@ import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.photo_model.Photos;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.ui.fragments.DisplayEarthPhoto;
-import teamtreehouse.com.nasaapp.ui.fragments.RoverImageRecyclerFragment;
 import teamtreehouse.com.nasaapp.ui.fragments.SelectCameraFragment;
 
 import static teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment.context;

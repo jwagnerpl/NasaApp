@@ -27,7 +27,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,9 +40,6 @@ import teamtreehouse.com.nasaapp.adapters.RoverImageRecyclerAdapter;
 import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.utilities.Utilities;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class RoverImageRecyclerFragment extends android.app.Fragment implements ItemClickListener{
 

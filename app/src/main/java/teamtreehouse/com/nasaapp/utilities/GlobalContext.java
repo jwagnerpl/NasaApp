@@ -2,7 +2,6 @@ package teamtreehouse.com.nasaapp.utilities;
 
 import android.app.Application;
 import android.content.Context;
-import android.provider.Settings;
 
 public class GlobalContext extends Application{
 

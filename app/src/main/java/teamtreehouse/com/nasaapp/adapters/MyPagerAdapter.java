@@ -1,6 +1,5 @@
 package teamtreehouse.com.nasaapp.adapters;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Parcelable;

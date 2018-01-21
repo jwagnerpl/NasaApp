@@ -3,14 +3,10 @@ package teamtreehouse.com.nasaapp.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,13 +24,13 @@ public class MainFragment extends android.app.Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu,menu);
+        inflater.inflate(R.menu.menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.copyrightInfo){
+        if (item.getItemId() == R.id.copyrightInfo) {
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
             alertDialog.setTitle("Copyright Info");
@@ -44,8 +40,6 @@ public class MainFragment extends android.app.Fragment {
         }
 
         return false;
-
-
 
     }
 

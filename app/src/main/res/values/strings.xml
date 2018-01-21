@@ -19,4 +19,6 @@
     <string name="get_a_picture_of_earth">Get a picture of Earth from space!</string>
     <string name="date_mm_dd_yyyy">Date - MM/DD/YYYY</string>
     <string name="select_date_yyyy_mm_dd">Select Date: YYYY-MM-DD</string>
+    <string name="image"></string>
+    <string name="question">\?</string>
 </resources>

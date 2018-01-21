@@ -1,56 +1,52 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="teamtreehouse.com.nasaapp.ui.fragments.EarthViewFragment">
 
     <TextView
+        android:id="@+id/explanationText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/explanationText"
         android:text="@string/get_a_picture_of_earth"
-        />
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/inputLayout"
-        app:layout_constraintTop_toBottomOf="@id/explanationText"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/explanationText">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/addressInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/address"
-            />
+            android:hint="@string/address" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/inputLayoutDate"
-        app:layout_constraintTop_toBottomOf="@id/inputLayout"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/inputLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/dateInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/select_date_yyyy_mm_dd"
-            />
+            android:hint="@string/select_date_yyyy_mm_dd" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_width="match_parent"
         android:id="@+id/coordinateSubmitButton"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutDate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/get_coordinates"
-        />
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutDate" />
 
 </android.support.constraint.ConstraintLayout>
