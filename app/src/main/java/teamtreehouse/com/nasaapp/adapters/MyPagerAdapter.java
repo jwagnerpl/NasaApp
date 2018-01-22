@@ -125,7 +125,7 @@ public class MyPagerAdapter extends PagerAdapter implements com.wdullaer.materia
                 Camera.selectedRover = position;
                 Log.d(TAG, "roverButton set");
                 Calendar now = Calendar.getInstance();
-                // @Refactor - Find better way to instantiate datepicker than creating additional instance of roverimagefragment
+                // Refactor - Find better way to instantiate datepicker than creating additional instance of roverimagefragment
                 RoverImageFragment roverImageFragment = new RoverImageFragment();
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.
                         DatePickerDialog.newInstance(/*refactor here*/roverImageFragment,

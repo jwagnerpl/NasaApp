@@ -11,7 +11,6 @@ import teamtreehouse.com.nasaapp.photo_model.Photos;
 public interface NasaClient {
     String NASA_PHOTOS_BASE_URI = "https://api.nasa.gov/mars-photos/api/v1/";
     String NASA_EARTH_BASE_URI = "https://api.nasa.gov/planetary/earth/";
-    String API_KEY = "N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk";
 
     @GET("manifests/curiosity?api_key=N1ZUNUU8Arq28WsOwrHGApmFe2L7CeXy4d06YNFk")
     Observable<DateRangeData> getCuriosityDateRange();

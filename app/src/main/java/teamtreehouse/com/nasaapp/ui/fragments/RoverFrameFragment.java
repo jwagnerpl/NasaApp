@@ -13,13 +13,10 @@ import teamtreehouse.com.nasaapp.R;
 
 public class RoverFrameFragment extends Fragment {
 
-    String frame;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_container, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_container, container, false);
     }
 
     @Override
@@ -30,11 +27,11 @@ public class RoverFrameFragment extends Fragment {
         ft.replace(R.id.frame1, rif, "addRover").commit();
     }
 
-    public static RoverFrameFragment newInstance(int page, String title) {
+    public static RoverFrameFragment newInstance() {
         RoverFrameFragment rf = new RoverFrameFragment();
         Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle",title);
+        args.putInt("someInt", 0);
+        args.putString("someTitle", "Rover Image");
         rf.setArguments(args);
         return rf;
     }

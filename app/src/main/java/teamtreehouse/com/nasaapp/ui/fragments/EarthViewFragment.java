@@ -74,7 +74,6 @@ public class EarthViewFragment extends android.app.Fragment {
                             }
                         }
                     }
-
                     new GetCoordinatesTask(address).execute();
 
                 } else {

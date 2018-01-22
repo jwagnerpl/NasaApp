@@ -15,7 +15,7 @@ public class MyFragmentPagerAdapter extends android.support.v13.app.FragmentPage
     public android.app.Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return RoverFrameFragment.newInstance(0, "Rover Image");
+                return RoverFrameFragment.newInstance();
 
             case 1:
                 return EarthFrameFragment.newInstance(0, "Earth View");

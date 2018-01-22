@@ -32,8 +32,6 @@ import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class StartScreenFragment extends android.app.Fragment {
 
-    public static ArrayList<CraftDates> craftDates;
-    Button launchButton;
     private static final String TAG = "StartScreenFragment";
     ImageView logo;
     TextView title;
@@ -54,8 +52,7 @@ public class StartScreenFragment extends android.app.Fragment {
         title = view.findViewById(R.id.title);
 
         //new FadeInAnimation(logo).setDuration(2000).animate();
-        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.orbit);
-        mp.start();
+        MediaPlayer.create(getActivity(), R.raw.orbit).start();
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(50,100));
         points.add(new Point(50,-150));
@@ -100,12 +97,10 @@ public class StartScreenFragment extends android.app.Fragment {
         }, 6000);
     }
 
-
         void startFragment(){
         android.app.Fragment mainFragment = new MainFragment();
         android.app.FragmentManager fm = getActivity().getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        //fragmentTransaction.setCustomAnimations(fade_in, fade_out);
         fragmentTransaction.replace(R.id.placeHolder, mainFragment).commit();
     }
 

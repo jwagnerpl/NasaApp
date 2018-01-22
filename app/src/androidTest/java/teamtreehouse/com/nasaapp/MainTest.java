@@ -1,10 +1,15 @@
 package teamtreehouse.com.nasaapp;
 
+import android.os.Build;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
+import android.util.Log;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,34 +17,47 @@ import org.junit.runner.RunWith;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 import static android.app.PendingIntent.getActivity;
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withChild;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParentIndex;
-import static android.support.test.espresso.matcher.ViewMatchers.withTagValue;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsNot.not;
 
 @RunWith(AndroidJUnit4.class)
 public class MainTest {
 
-
-
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    // To-Do, How to click on various datepicker elements, much difficulty correctly selecting a date.
+//    @Test
+//    public void datePickerRetrievesPhotos() throws Exception {
+//
+//        boolean isAvailable = false;
+//        // Arrange
+//
+//        while (!isAvailable) {
+//            try {
+//                onView(allOf(withId(R.id.roverButton), isDisplayed())).perform(click());
+//                isAvailable = true;
+//            } catch (NoMatchingViewException e) {
+//            }
+//        }
+//        onView(withId(R.id.mdtp_date_picker_year)).perform(click(),swipeLeft());
+//    }
+
     @Test
-    public void curiousityApiCallRetrievesCorrectPhotos() throws Exception {
+    public void earthViewReturnsCorrectPhoto() throws Exception {
         int counter = 0;
         boolean isAvailable = false;
         boolean earthPhotoAvail = false;
@@ -57,10 +75,10 @@ public class MainTest {
             } catch (NoMatchingViewException e) {
             }
         }
-        onView(withId(R.id.dateInput)).perform(typeText(date),closeSoftKeyboard());
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
         //Sometimes
-        onView(withId(R.id.dateInput)).perform(typeText(date),closeSoftKeyboard());
-        onView(withId(R.id.addressInput)).perform(typeText(location),closeSoftKeyboard());
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
+        onView(withId(R.id.addressInput)).perform(typeText(location), closeSoftKeyboard());
 
         onView(withId(R.id.coordinateSubmitButton)).perform(click());
         int i = 0;
@@ -74,14 +92,10 @@ public class MainTest {
 
             }
         }
-        // Assert
-
-//        intended(hasComponent(MainActivity.class.getName()));
-//        Intents.release();
     }
 
     @Test
-    public void curiousityApiCallNoCoordinatesFound() throws Exception {
+    public void earthViewFailsOnMissingLocationAddress() throws Exception {
         int counter = 0;
         boolean isAvailable = false;
         boolean earthPhotoAvail = false;
@@ -99,65 +113,40 @@ public class MainTest {
             } catch (NoMatchingViewException e) {
             }
         }
-        onView(withId(R.id.dateInput)).perform(typeText(date),closeSoftKeyboard());
-        //Sometimes
-        onView(withId(R.id.dateInput)).perform(typeText(date),closeSoftKeyboard());
-        onView(withId(R.id.addressInput)).perform(typeText(location),closeSoftKeyboard());
+
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
+        onView(withId(R.id.addressInput)).perform(typeText(location), closeSoftKeyboard());
 
         onView(withId(R.id.coordinateSubmitButton)).perform(click());
-        Thread.sleep(1000);
-        onView(withText(error)).check(matches(isDisplayed()));
-        onView(withText(error)).inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withText(error)).inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+
     }
 
-//
-//    @Test
-//    public void incorrectCredentialsDisplaysDialog() throws Exception {
-//
-//        // Arrange
-//
-//        String userName = "ben";
-//        String password = "wrongtest";
-//        onView(withId(R.id.usernameField)).perform(typeText(userName));
-//        onView(withId(R.id.passwordField)).perform(typeText(password));
-//
-//        // Act
-//        onView(withId(R.id.loginButton)).perform(click());
-//
-//        // Assert
-//
-//        onView(withText("Try logging in again with the required credentials or sign up.")).check(matches(isDisplayed()));
-//    }
-//
-//    @Test
-//    public void missingUsernameDisplaysDialog() throws Exception {
-//
-//        // Arrange
-//
-//        String password = "test";
-//        onView(withId(R.id.passwordField)).perform(typeText(password));
-//
-//        // Act
-//        onView(withId(R.id.loginButton)).perform(click());
-//
-//        // Assert
-//
-//        onView(withText(R.string.login_error_message)).check(matches(isDisplayed()));
-//    }
-//
-//    @Test
-//    public void missingPasswordDisplaysDialog() throws Exception {
-//
-//        // Arrange
-//
-//        String userName = "ben";
-//        onView(withId(R.id.usernameField)).perform(typeText(userName));
-//
-//        // Act
-//        onView(withId(R.id.loginButton)).perform(click());
-//
-//        // Assert
-//
-//        onView(withText("Try logging in again with the required credentials or sign up.")).check(matches(isDisplayed()));
-//    }
+    @Test
+    public void earthViewFailsOnIncorrectDate() throws Exception {
+        boolean isAvailable = false;
+        String date = "11-08";
+        String location = "pdx";
+        String error = "Oops, something went wrong. Check your input!";
+        // Arrange
+
+        while (!isAvailable) {
+            try {
+
+                onView(allOf(withId(R.id.viewPager))).perform(swipeLeft()).perform(swipeLeft()).perform(swipeLeft()).perform(swipeLeft());
+                isAvailable = true;
+
+            } catch (NoMatchingViewException e) {
+            }
+        }
+
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
+        onView(withId(R.id.dateInput)).perform(typeText(date), closeSoftKeyboard());
+        onView(withId(R.id.addressInput)).perform(typeText(location), closeSoftKeyboard());
+
+        onView(withId(R.id.coordinateSubmitButton)).perform(click());
+        onView(withText(error)).inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+
+    }
 }

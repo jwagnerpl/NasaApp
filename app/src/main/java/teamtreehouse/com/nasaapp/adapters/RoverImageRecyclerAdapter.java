@@ -1,5 +1,6 @@
 package teamtreehouse.com.nasaapp.adapters;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,12 +19,13 @@ import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 
 public class RoverImageRecyclerAdapter extends RecyclerView.Adapter<RoverImageRecyclerAdapter.ViewHolder> {
-    List<Photo> photos;
+    private List<Photo> photos;
     private static final String TAG = "RoverImageRecyclerAdapt";
-    ItemClickListener itemClickListener;
+    private ItemClickListener itemClickListener;
+    private Context context;
 
-    public RoverImageRecyclerAdapter(List<Photo> photos) {
-        this.photos = photos;
+    public RoverImageRecyclerAdapter(List<Photo> photos, Context context) {
+        this.context = context; this.photos = photos;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class RoverImageRecyclerAdapter extends RecyclerView.Adapter<RoverImageRe
         Photo photo = photos.get(position);
         if(!photo.getImgSrc().contains("https")){
         photo.setImgSrc(photo.getImgSrc().replaceAll("http","https"));}
-        Picasso.Builder builder = new Picasso.Builder(MainActivity.context);
+        Picasso.Builder builder = new Picasso.Builder(context);
         builder.listener(new Picasso.Listener() {
             @Override
             public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {

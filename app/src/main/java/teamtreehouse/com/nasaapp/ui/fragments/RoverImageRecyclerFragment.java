@@ -63,7 +63,7 @@ public class RoverImageRecyclerFragment extends android.app.Fragment implements 
         super.onViewCreated(view, savedInstanceState);
         photos = MainActivity.photoList;
         Log.d(TAG,photos.toString());
-        adapter = new RoverImageRecyclerAdapter(photos);
+        adapter = new RoverImageRecyclerAdapter(photos, getActivity());
         adapter.setItemClickListener(this);
         recyclerView = view.findViewById(R.id.imageRecyclerView);
         columns = Utilities.calculateNoOfColumns(getActivity().getApplicationContext());

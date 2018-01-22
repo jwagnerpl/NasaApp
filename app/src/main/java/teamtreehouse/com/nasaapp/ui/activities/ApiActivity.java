@@ -1,6 +1,5 @@
-package teamtreehouse.com.nasaapp.api;
+package teamtreehouse.com.nasaapp.ui.activities;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -19,26 +18,25 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import teamtreehouse.com.nasaapp.R;
+import teamtreehouse.com.nasaapp.api.NasaClient;
 import teamtreehouse.com.nasaapp.date_model.CraftDates;
 import teamtreehouse.com.nasaapp.date_model.DateRangeData;
 import teamtreehouse.com.nasaapp.date_model.PhotoManifest;
 import teamtreehouse.com.nasaapp.earth_model.EarthPhoto;
 import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.photo_model.Photos;
-import teamtreehouse.com.nasaapp.ui.activities.MainActivity;
 import teamtreehouse.com.nasaapp.ui.fragments.DisplayEarthPhoto;
 import teamtreehouse.com.nasaapp.ui.fragments.SelectCameraFragment;
 
 import static teamtreehouse.com.nasaapp.ui.fragments.RoverImageFragment.context;
 
-
-public class ApiCall extends Fragment {
+public class ApiActivity {
 
     private static final String TAG = "ApiCall";
     private ArrayList<Photo> photoList;
-    public static String uri;
 
     final ArrayList<CraftDates> craftDates = new ArrayList<>();
+
 
     //
     // CALL TO GET EARTH SNAPSHOT ONCLICK FROM EARTHVIEW FRAGMENT AND DISPLAYS IN EARTHFRAMEFRAGMENT
@@ -55,7 +53,6 @@ public class ApiCall extends Fragment {
             @Override
             public void onNext(Object value) {
                 EarthPhoto earthPhoto = (EarthPhoto) value;
-                uri = earthPhoto.getUrl();
                 MainActivity.earthUri = earthPhoto.getUrl();
                 if (MainActivity.earthUri == null)
                     Toast.makeText(context, "Sorry, no views found. Choose a different date.", Toast.LENGTH_LONG).show();
@@ -191,4 +188,5 @@ public class ApiCall extends Fragment {
 
         return retrofit.create(NasaClient.class);
     }
+
 }

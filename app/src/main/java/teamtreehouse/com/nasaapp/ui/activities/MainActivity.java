@@ -1,13 +1,12 @@
 package teamtreehouse.com.nasaapp.ui.activities;
 
-import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.widget.DatePicker;
+
 
 import java.util.ArrayList;
 
@@ -17,9 +16,8 @@ import teamtreehouse.com.nasaapp.photo_model.Photo;
 import teamtreehouse.com.nasaapp.ui.fragments.StartScreenFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity {
 
-    public static Context context;
     public static ArrayList<CraftDates> craftDates;
     public static String selectedDate;
     public static String selectedRover;
@@ -32,25 +30,26 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getSupportActionBar().hide();
+    protected void onCreate(Bundle savedInstanceState) throws NullPointerException {
+        //Remove actionbar for app start screen
+        if(getSupportActionBar() != null) getSupportActionBar().hide();
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         createStartScreenFrag(savedInstanceState);
-        context = this;
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
     }
 
     private void createStartScreenFrag(Bundle savedInstanceState) {
         Fragment startScreenFragment = new StartScreenFragment();
         android.app.FragmentManager fm = getFragmentManager();
+
+        //Inflate start screen fragment into main fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.placeHolder, startScreenFragment).commit();
-    }
-
-    @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
     }
 
     @Override
